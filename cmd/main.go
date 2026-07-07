@@ -1,8 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"url-shortener-api/config"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
+	config.ConnectDB()
 
 	router := gin.Default()
 
