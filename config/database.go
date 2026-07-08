@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"url-shortener-api/models"
+
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -39,5 +41,11 @@ func ConnectDB() {
 		panic("Failed to connect to database!")
 	}
 	DB = db
+
+	err = DB.AutoMigrate(&models.User{})
+	if err != nil {
+		panic("Failed to migrate database")
+	}
+
 	fmt.Println("Database Connected Successfully")
 }
