@@ -34,3 +34,18 @@ func RegisterUser(req models.SignupRequest) error {
 	}
 	return repository.CreateUser(&user)
 }
+
+func LoginUser(req models.LoginRequest) error {
+
+	user, err := repository.GetUserByEmail(req.Email)
+	if err != nil {
+		return err
+	}
+
+	err = utils.CheckPassword(user.Password, req.Password)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
