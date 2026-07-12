@@ -35,17 +35,23 @@ func RegisterUser(req models.SignupRequest) error {
 	return repository.CreateUser(&user)
 }
 
-func LoginUser(req models.LoginRequest) error {
+func LoginUser(req models.LoginRequest) (string, error) {
 
 	user, err := repository.GetUserByEmail(req.Email)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	err = utils.CheckPassword(user.Password, req.Password)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return nil
+	token, err := utils.GenerateToken(user.ID, user.Email)
+	if err != nil {
+		return "", err
+	}
+
+	return token, nil
+
 }
