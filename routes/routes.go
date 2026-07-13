@@ -24,7 +24,10 @@ func SetupRoutes(router *gin.Engine) {
 
 		{
 			protected.GET("/profile", controllers.Profile)
+			protected.POST("/shorten", controllers.CreateShortURL)
+			
 		}
-		
+		router.GET("/:code", controllers.RedirectURL)
+
 	}
 }

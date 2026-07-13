@@ -5,10 +5,9 @@ import "gorm.io/gorm"
 type URL struct {
 	gorm.Model
 
-	LongURL  string `gorm:"not null"`
-	ShortURL string `gorm:"unique;not null"`
+	LongURL  string `gorm:"column:long_url;not null"`
+	ShortURL string `gorm:"column:short_url;unique;not null"`
+	Clicks   uint   `gorm:"default:0"`
 
-	Clicks uint `gorm:"default:0"`
-
-	UserID uint
+	UserID uint `gorm:"column:user_id"`
 }

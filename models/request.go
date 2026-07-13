@@ -10,3 +10,7 @@ type LoginRequest struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
 }
+
+type ShortenRequest struct {
+	URL string `json:"url" binding:"required,url"`
+}
